@@ -5,22 +5,24 @@
  */
 package sprint1;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Dell
  */
 public class Driver extends User{
     
-    private String nationalID;
-    private String license;
-    private boolean verified;
+    protected String nationalID;
+    protected String license;
+    protected boolean verified;
     
     public Driver() {
         super();
         this.nationalID = "";
         this.license = "";
         this.verified = false;
-        this.setRegistration(new DriverRegistration());
+
     }
     
     public Driver(String username, String password, String mobile, Type type, String nationalID, String license) {
@@ -28,7 +30,7 @@ public class Driver extends User{
         this.license = license;
         this.nationalID = nationalID;
         this.verified = false;
-        this.setRegistration(new DriverRegistration());
+    
     }
     
     
@@ -55,6 +57,32 @@ public class Driver extends User{
 
     public boolean isVerified() {
         return verified;
+    }
+
+    @Override
+    public void register() {
+        Scanner input = new Scanner (System.in);
+        
+        System.out.print("Enter Driver Username: ");
+        this.username = input.nextLine();
+        
+        System.out.print("Enter Driver Password: ");
+        this.password = input.nextLine();
+        
+        System.out.print("Enter Driver Mobile: ");
+        this.mobile = input.nextLine();
+        
+        System.out.print("Enter Driver Licence: ");
+        this.license = input.nextLine();
+        
+        System.out.print("Enter Driver National-ID: ");
+        this.nationalID = input.nextLine();
+        
+        this.suspend = false;
+        
+        this.verified = false;
+        
+        this.type = Type.Driver;
     }
     
 }

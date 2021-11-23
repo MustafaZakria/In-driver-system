@@ -5,12 +5,13 @@ enum Type {
     Customer
 }
 public abstract class User {
-    private String username;
-    private String password;
-    private String mobile;
-    private boolean suspend;
-    private Type type;
-    private Registration registration;
+    protected String username;
+    protected String password;
+    protected String mobile;
+    protected boolean suspend;
+    protected Type type;
+    
+    
     public User(String username, String password, String mobile, Type type) {
         this.username = username;
         this.password = password;
@@ -25,18 +26,10 @@ public abstract class User {
          this.password = "";
         this.mobile = "";
         this.suspend = false;
-        this.registration = null;
-    }
-    
-    public void register(){
-        registration.register();
-    }
 
-    public void setRegistration(Registration registration) {
-        this.registration = registration;
     }
     
-    
+    public abstract void register();
 
     public void setUsername(String username) {
         this.username = username;
@@ -80,7 +73,8 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "User{" + "username=" + username + ", suspend=" + suspend + ", type=" + type + ", registration=" + registration + '}';
+        return "User{" + "username=" + username + ", password=" + password + ", mobile=" + mobile + ", suspend=" + suspend + ", type=" + type + '}';
     }
+
     
 }

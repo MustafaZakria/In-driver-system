@@ -17,13 +17,18 @@ public class ApplicationSystem {
     protected ArrayList<Driver> pendingDriverList;
     
     public ApplicationSystem(){
-        users = new ArrayList<User>();
-        pendingDriverList = new ArrayList<Driver>();
+        users = new ArrayList<>();
+        pendingDriverList = new ArrayList<>();
     }
     
 
-    public boolean login(User user) {
-        return false;
+    public User login(String username, String password) {
+        for (User user: users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            } 
+        } 
+        return null;
     }
     
     public void addUser(User user){
@@ -35,10 +40,12 @@ public class ApplicationSystem {
     }
 
     public ArrayList<User> getUsers() {
+        System.out.println(users);
         return users;
     }
 
     public ArrayList<Driver> getPendingDriverList() {
+        System.out.println(pendingDriverList);
         return pendingDriverList;
     }
     

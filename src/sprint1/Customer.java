@@ -1,24 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sprint1;
 
-/**
- *
- * @author Dell
- */
+import java.util.Scanner;
+
 public class Customer extends User{
     
     public Customer(String username, String password, String mobile, Type type) {
         super(username, password, mobile, type);
-        this.setRegistration(new CustomerRegistration());
     }
     
     public Customer(){
         super();
-        this.setRegistration(new CustomerRegistration());
+    } 
+
+    @Override
+    public void register() {
+        Scanner input = new Scanner (System.in);
+        System.out.print("Enter Customer Username: ");
+        this.username = input.nextLine();
+        
+        System.out.print("Enter Customer Password: ");
+        this.password = input.nextLine();
+        
+        System.out.print("Enter Customer Mobile: ");
+        this.mobile = input.nextLine();
+        
+        
+        this.suspend = false;
+        this.type = Type.Customer;
     }
     
 }
