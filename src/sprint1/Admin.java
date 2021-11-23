@@ -19,7 +19,9 @@ public class Admin {
         for(Driver driver: system.pendingDriverList){
             driver.verified = true;
             system.users.add(driver);
+            system.verifiedDrivers.add(driver);
             system.pendingDriverList = null;
+            system.pendingDriverList = new ArrayList<>();
         }
     }
     

@@ -5,6 +5,7 @@
  */
 package sprint1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,22 +17,26 @@ public class Driver extends User{
     protected String nationalID;
     protected String license;
     protected boolean verified;
-    
+    protected ArrayList<String> favAreas;
+    protected ArrayList<Ride> rides;
     public Driver() {
         super();
         this.nationalID = "";
         this.license = "";
         this.verified = false;
+        this.favAreas = new ArrayList<>();
+        this.rides = new ArrayList<>();
 
     }
     
-    public Driver(String username, String password, String mobile, Type type, String nationalID, String license) {
+   /* public Driver(String username, String password, String mobile, Type type, String nationalID, String license) {
         super(username, password, mobile, type);
         this.license = license;
         this.nationalID = nationalID;
         this.verified = false;
-    
-    }
+        this.favAreas = new ArrayList<>();
+        this.rides = new ArrayList<>();
+    }*/
     
     
     
@@ -58,7 +63,34 @@ public class Driver extends User{
     public boolean isVerified() {
         return verified;
     }
-
+    
+    public void addArea(String area){
+        favAreas.add(area);
+    }
+    
+    public void updateRides(Ride ride){
+        ride.setDriver(this);
+        rides.add(ride);
+    }
+    
+    public void getRides(){
+        System.out.println(rides);
+    }
+    
+    public void suggestPrice(){
+        double price;
+        Scanner scan = new Scanner(System.in);
+        for(Ride ride : rides){
+            if(ride.price == 0){
+                System.out.print("Suggest a price from " + ride.source +" to " + ride.destination + ": ");
+                price = scan.nextDouble();
+                ride.setPrice(price);
+                RideOffer rideOffer = new RideOffer(ride);
+            }
+            
+        }
+        
+    }
     @Override
     public void register() {
         Scanner input = new Scanner (System.in);

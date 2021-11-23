@@ -15,10 +15,12 @@ public class ApplicationSystem {
     
     protected ArrayList<User> users;
     protected ArrayList<Driver> pendingDriverList;
+    protected ArrayList<Driver> verifiedDrivers;
     
     public ApplicationSystem(){
         users = new ArrayList<>();
         pendingDriverList = new ArrayList<>();
+        verifiedDrivers = new ArrayList<>();
     }
     
 
@@ -42,6 +44,15 @@ public class ApplicationSystem {
     public ArrayList<User> getUsers() {
         System.out.println(users);
         return users;
+    }
+    
+    public void getVerifiedDrivers() {
+        System.out.println(verifiedDrivers);
+        
+    }
+    
+    public void addVerifiedDriver(Driver driver){
+        verifiedDrivers.add(driver);
     }
 
     public ArrayList<Driver> getPendingDriverList() {

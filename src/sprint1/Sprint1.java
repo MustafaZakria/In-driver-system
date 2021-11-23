@@ -46,9 +46,60 @@ public class Sprint1 {
                 } else if (system.login(username, password).getType() == Type.Customer) {
                      Customer customer = (Customer) system.login(username, password);
                      System.out.println("Welcome: " + customer.getUsername());
+                     System.out.println("1- Request Ride\n2- Get Offers\n3- Exit from list");
+                     int customerChoice = scan.nextInt();
+                     switch(customerChoice){
+                         case 1:
+                            System.out.println("Enter Source And Destination");
+                            String source = scan.next();
+                            String destination = scan.next();
+                            customer.requestRide(source, destination, system);
+                            break;
+                         case 2:
+                            customer.getOffers();
+                            break;
+                         case 3:
+                             break;
+                         default:
+                             System.out.println("Invalid Choice");
+                             break;
+                     }
+                     
+                    
                 } else if (system.login(username, password).getType() == Type.Driver) {
                     Driver driver = (Driver) system.login(username, password);
                      System.out.println("Welcome: " + driver.getUsername());
+                     
+                     System.out.println("1- Add Favorite Areas\n2- Suggest Ride Price\n3- Exit from list");
+                     int driverChoice = scan.nextInt();
+                     switch(driverChoice){
+                         case 1:{
+                             String area="";
+                             System.out.println("After finishing adding areas enter finish");
+                             
+                             while(true){
+                                area = scan.next();
+                                if(area.equals("finish"))
+                                    break;
+                                driver.addArea(area);
+                             }
+                             break;
+                         }
+                         
+                         case 2:
+                             System.out.println("Driver's rides:");
+                             driver.getRides();
+                             driver.suggestPrice();
+                             break;
+                             
+                         case 3:
+                             break;
+                        default:
+                            System.out.println("Invalid input");
+                            break;
+                             
+                     }
+
                 }
                 
             } else if(choice == 3) {
@@ -79,7 +130,7 @@ public class Sprint1 {
             } else if (choice == 4) 
                 break;
         }
-        system.getUsers();
+        //system.getPendingDriverList();
     }
     
 }
