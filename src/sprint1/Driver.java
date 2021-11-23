@@ -18,15 +18,16 @@ public class Driver extends User{
     protected String license;
     protected boolean verified;
     protected ArrayList<String> favAreas;
-    protected ArrayList<Ride> rides;
+    protected ArrayList<Ride> requestedRides;
+    protected ArrayList<Ride> Rides;
     public Driver() {
         super();
         this.nationalID = "";
         this.license = "";
         this.verified = false;
         this.favAreas = new ArrayList<>();
-        this.rides = new ArrayList<>();
-
+        this.requestedRides = new ArrayList<>();
+        this.Rides = new ArrayList<>();
     }
     
    /* public Driver(String username, String password, String mobile, Type type, String nationalID, String license) {
@@ -69,18 +70,18 @@ public class Driver extends User{
     }
     
     public void updateRides(Ride ride){
-        ride.setDriver(this);
-        rides.add(ride);
+        //ride.setDriver(this);  should be after customer accept the driver's offer
+        requestedRides.add(ride); 
     }
     
-    public void getRides(){
-        System.out.println(rides);
+    public void getRequestedRides(){
+        System.out.println(requestedRides);
     }
     
     public void suggestPrice(){
         double price;
         Scanner scan = new Scanner(System.in);
-        for(Ride ride : rides){
+        for(Ride ride : requestedRides){
             if(ride.price == 0){
                 System.out.print("Suggest a price from " + ride.source +" to " + ride.destination + ": ");
                 price = scan.nextDouble();

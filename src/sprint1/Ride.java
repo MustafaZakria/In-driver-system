@@ -75,7 +75,12 @@ public class Ride {
     
     @Override
     public String toString() {
-        return "Ride{" + "source=" + source + ", destination=" + destination + ", price=" + price +'}';
+    	String driverInfo ="";
+    	if(driver!=null) { 
+    		driverInfo = "Driver{" + "Name=" + driver.getUsername() + ", Mobile=" + driver.getMobile()+"}\n";
+    	}
+    	String ride = "Ride{" + "source=" + source + ", destination=" + destination + ", price=" + price +'}';
+    	return driverInfo+ride;
     }
     
     

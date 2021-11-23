@@ -6,6 +6,7 @@
 package sprint1;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -24,12 +25,20 @@ public class ApplicationSystem {
     }
     
 
-    public User login(String username, String password) {
+    public User login() {
+    	Scanner scanner = new Scanner(System.in);
+    	
+    	System.out.print("Enter username: ");
+        String username = scanner.next();
+        
+        System.out.print("Enter password: ");
+        String password = scanner.next();
+        
         for (User user: users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 return user;
             } 
-        } 
+        }
         return null;
     }
     

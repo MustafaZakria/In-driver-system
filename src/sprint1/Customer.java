@@ -8,15 +8,18 @@ public class Customer extends User{
     
     //private RideOrganization rideOrg;
     ArrayList<Ride> offers;
+    protected ArrayList<Ride> Rides;
     
     public Customer(String username, String password, String mobile, Type type) {
         super(username, password, mobile, type);
         offers = new ArrayList<>();
+        this.Rides = new ArrayList<>();
     }
     
     public Customer(){
         super();
         offers = new ArrayList<>();
+        this.Rides = new ArrayList<>();
     } 
 
     @Override
@@ -49,6 +52,6 @@ public class Customer extends User{
         this.offers = offers;
     }
     
-    
+
     
 }
