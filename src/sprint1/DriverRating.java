@@ -1,0 +1,30 @@
+package sprint1;
+
+import java.util.Scanner;
+
+public class DriverRating {
+    Driver driver;
+    Customer customer;
+
+    public DriverRating(Driver driver, Customer customer) {
+        this.driver = driver;
+        this.customer = customer;
+    }
+    
+    public void calculateAvg(){
+        double sum = 0;
+        if(!driver.ratings.isEmpty()){
+            for(Customer customer :driver.ratings.keySet())
+                sum += driver.ratings.get(customer);
+        }
+        this.driver.setAverageRating(sum/driver.ratings.size());
+    }
+    
+    public void addRating(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Provide a star rating to the driver from 1 to 5 (1 worst, 5 Best)");
+        int rate = scan.nextInt();
+        driver.ratings.put(customer, rate);
+        calculateAvg();
+    }
+}

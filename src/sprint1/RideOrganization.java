@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sprint1;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Dell
- */
+
 public class RideOrganization {
     Ride ride;
     ApplicationSystem system;
@@ -20,7 +13,7 @@ public class RideOrganization {
         this.ride = ride;
         this.system = system;
         availableDrivers = new ArrayList<>();
-        matchDrivers(ride, system);
+       
     }
 
     public RideOrganization() {
@@ -41,7 +34,7 @@ public class RideOrganization {
                 if(area.equals(ride.source))
                 {
                     availableDrivers.add(driver);
-                    notifyDrivers(ride);
+                    driver.updateRides(ride);
                     flag = true;
                     break;
                 }
@@ -50,11 +43,8 @@ public class RideOrganization {
         if(!flag)
             System.out.println("No Available Drivers");
     }
-    public void notifyDrivers(Ride ride){
-        for(Driver driver : availableDrivers){
-            driver.updateRides(ride);
-        }
-    }
+    
+    
     public void setSystem(ApplicationSystem system) {
         this.system = system;
     }
@@ -63,6 +53,11 @@ public class RideOrganization {
         System.out.print(availableDrivers);
     }
     
+    public void removeRide(Ride ride){
+        for(Driver driver : availableDrivers){
+            driver.requestedRides.remove(ride);
+        }
+    }
     
     
 }

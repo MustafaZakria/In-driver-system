@@ -49,9 +49,11 @@ public class Sprint1 {
                      Customer customer = (Customer) user;
                      menu.displayCustomerMenu(system, customer);
                      
+                     
                 } else if (user.getType() == Type.Driver) {
                     Driver driver = (Driver) user;
                     menu.displayDriverMenu(system, driver);
+                    
 
                 }
                 
@@ -62,7 +64,7 @@ public class Sprint1 {
                 break;
         }
         
-        //system.getPendingDriverList();
+       
     }
     
 }

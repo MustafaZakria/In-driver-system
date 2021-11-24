@@ -1,9 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sprint1;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -11,24 +10,31 @@ package sprint1;
  */
 public class Ride {
     String source, destination;
-    double price;
-    Driver driver;
     Customer customer;
-
+    HashMap<Driver, Double> driverPrice;
+    
+    
     public Ride(String source, String destination, Customer customer) {
         this.source = source;
         this.destination = destination;
-        this.price = 0;
         this.customer = customer;
-        this.driver = null;
+        this.driverPrice = new HashMap<Driver, Double>();
+
+    }
+    
+    public Ride(String source, String destination , double price, Driver driver, Customer customer){
+        this.source = source;
+        this.destination = destination;
+        this.customer = customer;
+        driverPrice = new HashMap<>();
+        driverPrice.put(driver, price);
     }
 
     public Ride() {
         this.source = "";
         this.destination = "";
-        this.price = 0;
         this.customer = null;
-        this.driver = null;
+        this.driverPrice = new HashMap<>();
     }
 
     public String getSource() {
@@ -47,22 +53,6 @@ public class Ride {
         this.destination = destination;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public Driver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -70,17 +60,21 @@ public class Ride {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    public HashMap<Driver, Double> getDriverPrice() {
+        for (Map.Entry<Driver, Double> entry : driverPrice.entrySet())
+        {
+            System.out.println(entry.getKey() + ", Price= " + entry.getValue());
+        }
+        return driverPrice;
+    }
     
     
     
     @Override
     public String toString() {
-    	String driverInfo ="";
-    	if(driver!=null) { 
-    		driverInfo = "Driver{" + "Name=" + driver.getUsername() + ", Mobile=" + driver.getMobile()+"}\n";
-    	}
-    	String ride = "Ride{" + "source=" + source + ", destination=" + destination + ", price=" + price +'}';
-    	return driverInfo+ride;
+    	String ride = "Ride{" + "source=" + source + ", destination=" + destination +'}';
+    	return ride;
     }
     
     

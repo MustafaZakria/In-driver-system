@@ -1,46 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sprint1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
-/**
- *
- * @author Dell
- */
+
 public class Driver extends User{
     
     protected String nationalID;
     protected String license;
     protected boolean verified;
+    protected double averageRating;
     protected ArrayList<String> favAreas;
     protected ArrayList<Ride> requestedRides;
     protected ArrayList<Ride> Rides;
+    protected HashMap<Customer, Integer> ratings;
+    
     public Driver() {
         super();
         this.nationalID = "";
         this.license = "";
+        this.averageRating = 0;
         this.verified = false;
         this.favAreas = new ArrayList<>();
         this.requestedRides = new ArrayList<>();
         this.Rides = new ArrayList<>();
+        this.ratings = new HashMap<>();
     }
     
-   /* public Driver(String username, String password, String mobile, Type type, String nationalID, String license) {
-        super(username, password, mobile, type);
-        this.license = license;
-        this.nationalID = nationalID;
-        this.verified = false;
-        this.favAreas = new ArrayList<>();
-        this.rides = new ArrayList<>();
-    }*/
-    
-    
-    
+
     public void setNationalID(String nationalID) {
         this.nationalID = nationalID;
     }
@@ -70,25 +60,48 @@ public class Driver extends User{
     }
     
     public void updateRides(Ride ride){
-        //ride.setDriver(this);  should be after customer accept the driver's offer
+        
         requestedRides.add(ride); 
     }
     
     public void getRequestedRides(){
         System.out.println(requestedRides);
     }
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public HashMap<Customer, Integer> getRatings() {
+        
+        for (Map.Entry<Customer, Integer> entry : ratings.entrySet())
+        {
+            System.out.println(entry.getKey() + ", Their rating= " + entry.getValue());
+        }
+        return ratings;
+    }
+
+    public void setRatings(HashMap<Customer, Integer> ratings) {
+        this.ratings = ratings;
+    }
+    
+    
+    
     
     public void suggestPrice(){
         double price;
         Scanner scan = new Scanner(System.in);
         for(Ride ride : requestedRides){
-            if(ride.price == 0){
-                System.out.print("Suggest a price from " + ride.source +" to " + ride.destination + ": ");
-                price = scan.nextDouble();
-                ride.setPrice(price);
-                RideOffer rideOffer = new RideOffer(ride);
-            }
             
+            System.out.print("Suggest a price from " + ride.source +" to " + ride.destination + ": ");
+            price = scan.nextDouble();
+            ride.driverPrice.put(this, price);
+            RideOffer rideOffer = new RideOffer(ride.source, ride.destination, price, this, ride.customer);
+ 
         }
         
     }
@@ -117,5 +130,14 @@ public class Driver extends User{
         
         this.type = Type.Driver;
     }
+
+    @Override
+    public String toString() {
+        return "Driver{" + "Name= "+ this.username +", averageRating=" + averageRating + '}';
+    }
+
+    
+    
+    
     
 }

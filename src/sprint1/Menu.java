@@ -7,7 +7,7 @@ public class Menu {
     	Scanner scan = new Scanner (System.in);
         System.out.println("Welcome: " + customer.getUsername());
     	while(true) {
-            System.out.println("1- Request Ride\n2- Get Offers\n3- Exit");
+            System.out.println("1- Request Ride\n2- Get Offers\n3- Rate Driver\n4- Exit");
             int customerChoice = scan.nextInt();
             switch(customerChoice){
             
@@ -19,23 +19,34 @@ public class Menu {
                    break;
                    
                 case 2:
-                	customer.getOffers();
-                   System.out.println("Choose number of offer");
-                   int offerChoice = scan.nextInt();
-                   customer.offers.get(offerChoice-1).setDriver(customer.offers.get(offerChoice-1).getDriver());
-                   customer.Rides.add(customer.offers.get(offerChoice-1));
-                   customer.offers.get(offerChoice-1).getDriver().Rides.add(customer.offers.get(offerChoice-1));
-                   customer.offers.get(offerChoice-1).getDriver().requestedRides.remove(customer.offers.get(offerChoice-1));
+                    customer.getOffers();
+                    if(!customer.offers.isEmpty()){
+                        System.out.println("Choose number of offer");
+                        int offerChoice = scan.nextInt();
+                        Ride ride;
+                        ride = new Ride(customer.offers.get(offerChoice-1).source,customer.offers.get(offerChoice-1).dest, customer.offers.get(offerChoice-1).price, customer.offers.get(offerChoice-1).driver, customer);
+                        customer.offers.get(offerChoice-1).driver.Rides.add(ride);
+                        customer.acceptRide(ride);
+                                             
+
+                    }else{
+                        System.out.println("There are no offers available");
+                    }
+                   
                    break;
                    
                 case 3:
+                    customer.rateDriver();
+                    break;
+                    
+                case 4:
                     break;
                     
                 default:
                     System.out.println("Invalid Choice");
                     break;
             }
-            if(customerChoice==3) break;
+            if(customerChoice==4) break;
     	}
 
     }
@@ -43,11 +54,11 @@ public class Menu {
     	Scanner scan = new Scanner (System.in);
     	System.out.println("Welcome: " + driver.getUsername());
     	while(true) {
-            System.out.println("1- Add Favorite Areas\n2- Requests rides\n3- Exit");
+            System.out.println("1- Add Favorite Areas\n2- Requested rides\n3- List Your Ratings\n4- Exit");
             int driverChoice = scan.nextInt();
             switch(driverChoice){
                 case 1:{
-                    String area="";
+                    String area;
                     System.out.println("After finishing adding areas enter finish");
                     
                     while(true){
@@ -66,13 +77,20 @@ public class Menu {
                     break;
                     
                 case 3:
+                    if(driver.ratings.isEmpty())
+                        System.out.println("You have no ratings");
+                    else
+                        driver.getRatings();
+                    break;
+                    
+                case 4:
                     break;
                default:
                    System.out.println("Invalid input");
                    break;
                     
             }
-            if(driverChoice==3) break;
+            if(driverChoice==4) break;
     	}
     }
     

@@ -11,7 +11,6 @@ public abstract class User {
     protected boolean suspend;
     protected Type type;
     
-    //public abstract void displayMenu(ApplicationSystem system);
     
     public User(String username, String password, String mobile, Type type) {
         this.username = username;

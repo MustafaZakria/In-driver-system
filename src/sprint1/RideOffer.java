@@ -1,25 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sprint1;
 
-/**
- *
- * @author Dell
- */
 public class RideOffer {
-    Ride ride;
+   
+    String source, dest;
+    double price;
+    Driver driver;
+    Customer customer;
 
-    public RideOffer(Ride ride) {
-        this.ride = ride;
+   
+    public RideOffer(String source, String dest, double price, Driver driver, Customer customer) {
+        this.source = source;
+        this.dest = dest;
+        this.price = price;
+        this.driver = driver;
+        this.customer = customer;
         notifyCustomer();
     }
     
     
+    
+    
     public void notifyCustomer(){
-        ride.customer.offers.add(ride);
+       customer.offers.add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "RideOffer{" + "source=" + source + ", dest=" + dest + ", price=" + price + ", driver=" + driver + '}';
     }
 
     
