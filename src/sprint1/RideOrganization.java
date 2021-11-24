@@ -53,11 +53,6 @@ public class RideOrganization {
         System.out.print(availableDrivers);
     }
     
-    public void removeRide(Ride ride){
-        for(Driver driver : availableDrivers){
-            driver.requestedRides.remove(ride);
-        }
-    }
     
     
 }

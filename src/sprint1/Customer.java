@@ -60,19 +60,21 @@ public class Customer extends User{
         Rides.add(ride);
         this.offers = null;
         this.offers = new ArrayList<>();
-        rideOrg.removeRide(ride);
     }
     
     public void rateDriver(){
+        ArrayList<Ride> found = new ArrayList<>();
         if(!Rides.isEmpty()){
             for(Ride ride : Rides){
                 ride.getDriverPrice();
                 Driver driver = (Driver) ride.driverPrice.keySet().toArray()[0];
                 DriverRating rating = new DriverRating(driver ,this);
                 rating.addRating();
-                
+                found.add(ride);
             }
+            Rides.removeAll(found);
         }
+        
         else{
             System.out.println("Your Rides are Empty!");
         }

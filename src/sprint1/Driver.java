@@ -95,14 +95,17 @@ public class Driver extends User{
     public void suggestPrice(){
         double price;
         Scanner scan = new Scanner(System.in);
+        ArrayList<Ride> found = new ArrayList<>();
         for(Ride ride : requestedRides){
             
             System.out.print("Suggest a price from " + ride.source +" to " + ride.destination + ": ");
             price = scan.nextDouble();
             ride.driverPrice.put(this, price);
             RideOffer rideOffer = new RideOffer(ride.source, ride.destination, price, this, ride.customer);
- 
+            found.add(ride);
+
         }
+        requestedRides.removeAll(found);
         
     }
     @Override
