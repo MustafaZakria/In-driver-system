@@ -136,7 +136,7 @@ public class Driver extends User{
 
     @Override
     public String toString() {
-        return "Driver{" + "Name= "+ this.username +", averageRating=" + averageRating + '}';
+        return "{" + "Name= "+ this.username +", averageRating=" + averageRating + '}';
     }
 
     

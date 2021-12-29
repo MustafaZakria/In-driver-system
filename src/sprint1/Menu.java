@@ -19,6 +19,7 @@ public class Menu {
                    break;
                    
                 case 2:
+                    
                     customer.getOffers();
                     if(!customer.offers.isEmpty()){
                         System.out.println("Choose number of offer");
@@ -27,7 +28,7 @@ public class Menu {
                         ride = new Ride(customer.offers.get(offerChoice-1).source,customer.offers.get(offerChoice-1).dest, customer.offers.get(offerChoice-1).price, customer.offers.get(offerChoice-1).driver, customer);
                         customer.offers.get(offerChoice-1).driver.Rides.add(ride);
                         customer.acceptRide(ride);
-                                             
+                        system.setAllAcceptedRides();
 
                     }else{
                         System.out.println("There are no offers available");
@@ -74,6 +75,7 @@ public class Menu {
                     System.out.println("Driver's rides:");
                     driver.getRequestedRides();
                     driver.suggestPrice();
+                    system.setAllOffers();
                     break;
                     
                 case 3:
@@ -98,7 +100,7 @@ public class Menu {
     	Scanner scan = new Scanner (System.in);
     	System.out.println("Welcome Admin");
     	while(true) {           
-            System.out.println("1-List All Pending Drivers\n2- Suspend User\n3- Exit");
+            System.out.println("1-List All Pending Drivers\n2- Suspend User\n3-Get All Offers\n4- Get All Accepted Rides\n5- Exit");
             
             int adminChoice = scan.nextInt();
            
@@ -119,7 +121,11 @@ public class Menu {
                  }
             } else if(adminChoice == 2){
             	admin.suspendUser();
-            }
+            } else if(adminChoice == 3){
+                admin.getAllOffers();
+            } else if(adminChoice == 4)
+                admin.getAllAcceptedRides();
+            
             else break;
     	}
     }

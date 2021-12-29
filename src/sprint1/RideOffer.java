@@ -27,7 +27,7 @@ public class RideOffer {
 
     @Override
     public String toString() {
-        return "RideOffer{" + "source=" + source + ", dest=" + dest + ", price=" + price + ", driver=" + driver + '}';
+        return "Ride Offer{" + "source=" + source + ", dest=" + dest + ", price=" + price + ", driver=" + driver + '}';
     }
 
     

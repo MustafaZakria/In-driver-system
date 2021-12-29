@@ -40,5 +40,16 @@ public class Admin {
         return system.getPendingDriverList();
     }
     
+    public void getAllOffers(){
+        //system.setAllOffers();
+        for(RideOffer ride : system.rideOffers)
+            System.out.println(ride);
+    }
+    
+    public void getAllAcceptedRides(){
+        
+        for(Ride ride : system.acceptedRides)
+            System.out.println(ride);
+    }
 
 }
