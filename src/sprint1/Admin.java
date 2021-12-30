@@ -1,6 +1,7 @@
 
 package sprint1;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -48,8 +49,24 @@ public class Admin {
     
     public void getAllAcceptedRides(){
         
-        for(Ride ride : system.acceptedRides)
+        for(Ride ride : system.acceptedRides){
             System.out.println(ride);
+        }
+            
+    }
+    
+    public void getArrivingEvent(){
+        
+        for(Ride ride : system.acceptedRides){
+            System.out.println("Arriving Time: " + ride.arrivingTime+", Driver Name: "+ ride.getDriver().getUsername() +", Customer Name: "+ ride.customer.getUsername());
+        }
+    }
+    
+    public void getDestinationEvent(){
+        for(Ride ride : system.acceptedRides){
+            LocalTime destTime = ride.arrivingTime.plusMinutes(ride.duration);
+            System.out.println("Destination Time: " + destTime +", Driver Name: "+ ride.getDriver().getUsername() +", Customer Name: "+ ride.customer.getUsername());
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 
 package sprint1;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -102,12 +103,18 @@ public class Driver extends User{
             price = scan.nextDouble();
             ride.driverPrice.put(this, price);
             RideOffer rideOffer = new RideOffer(ride.source, ride.destination, price, this, ride.customer);
+            rideOffer.offerTime = LocalTime.now();
             found.add(ride);
-
+            
         }
         requestedRides.removeAll(found);
         
     }
+    
+    public void arrived(Ride ride){
+        ride.arrivingTime = LocalTime.now();
+    }
+    
     @Override
     public void register() {
         Scanner input = new Scanner (System.in);

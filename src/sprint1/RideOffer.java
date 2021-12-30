@@ -1,12 +1,15 @@
 
 package sprint1;
 
+import java.time.LocalTime;
+
 public class RideOffer {
    
     String source, dest;
     double price;
     Driver driver;
     Customer customer;
+    LocalTime offerTime;
 
    
     public RideOffer(String source, String dest, double price, Driver driver, Customer customer) {
@@ -27,7 +30,7 @@ public class RideOffer {
 
     @Override
     public String toString() {
-        return "Ride Offer{" + "source=" + source + ", dest=" + dest + ", price=" + price + ", driver=" + driver + '}';
+        return "Ride Offer{" + "source=" + source + ", dest=" + dest + ", price=" + price + ", driver=" + driver + " Offer Time: "+ offerTime +'}';
     }
 
     

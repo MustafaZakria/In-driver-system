@@ -1,6 +1,6 @@
-
 package sprint1;
 
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,11 +9,14 @@ import java.util.Map;
  * @author Dell
  */
 public class Ride {
+
     String source, destination;
     Customer customer;
     HashMap<Driver, Double> driverPrice;
-    
-    
+    LocalTime acceptTime;
+    long duration;
+    LocalTime arrivingTime;
+
     public Ride(String source, String destination, Customer customer) {
         this.source = source;
         this.destination = destination;
@@ -21,13 +24,14 @@ public class Ride {
         this.driverPrice = new HashMap<Driver, Double>();
 
     }
-    
-    public Ride(String source, String destination , double price, Driver driver, Customer customer){
+
+    public Ride(String source, String destination, double price, Driver driver, Customer customer) {
         this.source = source;
         this.destination = destination;
         this.customer = customer;
         driverPrice = new HashMap<>();
         driverPrice.put(driver, price);
+        this.duration = 10;
     }
 
     public Ride() {
@@ -62,20 +66,24 @@ public class Ride {
     }
 
     public HashMap<Driver, Double> getDriverPrice() {
-        for (Map.Entry<Driver, Double> entry : driverPrice.entrySet())
-        {
+        for (Map.Entry<Driver, Double> entry : driverPrice.entrySet()) {
             System.out.println(entry.getKey() + ", Price= " + entry.getValue());
         }
         return driverPrice;
     }
-    
-    
-    
+
+    public Driver getDriver() {
+        Driver driver = new Driver();
+        for (Map.Entry<Driver, Double> entry : driverPrice.entrySet()) {
+            driver = (entry.getKey());
+        }
+        return driver;
+    }
+
     @Override
     public String toString() {
-    	String ride = "Ride{" + "source=" + source + ", destination=" + destination +'}';
-    	return ride;
+        String ride = "Ride{" + " Customer Name: " + customer.username + ", source=" + source + ", destination=" + destination + ", Acceptance Time: " + acceptTime + '}';
+        return ride;
     }
-    
-    
+
 }

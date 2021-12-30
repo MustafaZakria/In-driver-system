@@ -1,6 +1,7 @@
 
 package sprint1;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -58,6 +59,7 @@ public class Customer extends User{
     
     public void acceptRide(Ride ride){
         Rides.add(ride);
+        ride.acceptTime = LocalTime.now();
         this.offers = null;
         this.offers = new ArrayList<>();
     }
