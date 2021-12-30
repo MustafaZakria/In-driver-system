@@ -30,7 +30,7 @@ public class Sprint1 {
                     Customer customer = new Customer();
                     customer.register();
                     system.addUser(customer);
-                    menu.displayCustomerMenu(system, customer);
+                    menu.displayCustomerMenu(system, customer, admin);
                     
                 } else 
                     System.out.println("invalid choice");
@@ -47,7 +47,7 @@ public class Sprint1 {
         
                 } else if (user.getType() == Type.Customer) {
                      Customer customer = (Customer) user;
-                     menu.displayCustomerMenu(system, customer);
+                     menu.displayCustomerMenu(system, customer, admin);
                      
                      
                 } else if (user.getType() == Type.Driver) {

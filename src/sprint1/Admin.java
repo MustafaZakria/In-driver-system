@@ -1,19 +1,19 @@
 
 package sprint1;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Admin {
     ApplicationSystem system;
-
-    public Admin() {
-        
-    }
+    ArrayList<String> discountAreas;
+    final double discountPercentage = 0.1;
 
     public Admin(ApplicationSystem system) {
         this.system = system;
+        discountAreas = new ArrayList<>();
+        discountAreas.add("giza");
+        discountAreas.add("cairo");
     }
     
     public void verify(){
@@ -64,9 +64,15 @@ public class Admin {
     
     public void getDestinationEvent(){
         for(Ride ride : system.acceptedRides){
-            LocalTime destTime = ride.arrivingTime.plusMinutes(ride.duration);
-            System.out.println("Destination Time: " + destTime +", Driver Name: "+ ride.getDriver().getUsername() +", Customer Name: "+ ride.customer.getUsername());
+            System.out.println("Destination Time: " + ride.destTime +", Driver Name: "+ ride.getDriver().getUsername() +", Customer Name: "+ ride.customer.getUsername());
         }
+    }
+    
+    public void discounts(Ride ride) {
+        if(discountAreas.contains(ride.destination)) {
+            ride.getCustomer().balance += discountPercentage * ride.getPrice();           
+        }
+        
     }
 
 }

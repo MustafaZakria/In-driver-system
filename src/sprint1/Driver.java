@@ -29,6 +29,7 @@ public class Driver extends User{
         this.requestedRides = new ArrayList<>();
         this.Rides = new ArrayList<>();
         this.ratings = new HashMap<>();
+        this.balance = 0;
     }
     
 
@@ -90,9 +91,6 @@ public class Driver extends User{
         this.ratings = ratings;
     }
     
-    
-    
-    
     public void suggestPrice(){
         double price;
         Scanner scan = new Scanner(System.in);
@@ -114,7 +112,10 @@ public class Driver extends User{
     public void arrived(Ride ride){
         ride.arrivingTime = LocalTime.now();
     }
-    
+    public void rideComplete(Ride ride) {
+         ride.destTime = ride.arrivingTime.plusMinutes(ride.duration);
+         balance += ride.getPrice();
+    } 
     @Override
     public void register() {
         Scanner input = new Scanner (System.in);

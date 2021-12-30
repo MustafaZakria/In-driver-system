@@ -15,12 +15,14 @@ public class Customer extends User{
         super(username, password, mobile, type);
         offers = new ArrayList<>();
         this.Rides = new ArrayList<>();
+        this.balance = 1000;
     }
     
     public Customer(){
         super();
         offers = new ArrayList<>();
         this.Rides = new ArrayList<>();
+        this.balance = 1000;
     } 
 
     @Override
@@ -58,10 +60,12 @@ public class Customer extends User{
     
     
     public void acceptRide(Ride ride){
+        balance -= ride.getPrice();
         Rides.add(ride);
         ride.acceptTime = LocalTime.now();
         this.offers = null;
         this.offers = new ArrayList<>();
+        
     }
     
     public void rateDriver(){
@@ -82,7 +86,7 @@ public class Customer extends User{
         }
         
     }
-
+   
     @Override
     public String toString() {
         return "Customer{" + this.username +'}';

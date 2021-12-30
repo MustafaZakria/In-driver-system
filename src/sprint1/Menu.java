@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public void displayCustomerMenu(ApplicationSystem system, Customer customer) {
+    public void displayCustomerMenu(ApplicationSystem system, Customer customer, Admin admin) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome: " + customer.getUsername());
         while (true) {
-            System.out.println("1- Request Ride\n2- Get Offers\n3- Rate Driver\n4- Exit");
+            System.out.println("1- Request Ride\n2- Get Offers\n3- Rate Driver\n4-Show Balance\n5- Exit");
             int customerChoice = scan.nextInt();
             switch (customerChoice) {
 
@@ -28,6 +28,7 @@ public class Menu {
                         Ride ride;
                         
                         ride = new Ride(customer.offers.get(offerChoice - 1).source, customer.offers.get(offerChoice - 1).dest, customer.offers.get(offerChoice - 1).price, customer.offers.get(offerChoice - 1).driver, customer);
+                        admin.discounts(ride);
                         
                         customer.offers.get(offerChoice - 1).driver.Rides.add(ride);
                         Driver chosenDriver = customer.offers.get(offerChoice - 1).driver;
@@ -35,6 +36,7 @@ public class Menu {
                         
                         chosenDriver.arrived(ride);
                         system.setAllAcceptedRides();
+                        chosenDriver.rideComplete(ride);
                         
 
                     } else {
@@ -46,15 +48,19 @@ public class Menu {
                 case 3:
                     customer.rateDriver();
                     break;
-
+                    
                 case 4:
+                    System.out.println("Balance: " + customer.getBalance());
+                    break;
+
+                case 5:
                     break;
 
                 default:
                     System.out.println("Invalid Choice");
                     break;
             }
-            if (customerChoice == 4) {
+            if (customerChoice == 5) {
                 break;
             }
         }
@@ -65,7 +71,7 @@ public class Menu {
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome: " + driver.getUsername());
         while (true) {
-            System.out.println("1- Add Favorite Areas\n2- Requested rides\n3- List Your Ratings\n4- Exit");
+            System.out.println("1- Add Favorite Areas\n2- Requested rides\n3- List Your Ratings\n4- Show Balance\n5- Exit");
             int driverChoice = scan.nextInt();
             switch (driverChoice) {
                 case 1: {
@@ -96,15 +102,17 @@ public class Menu {
                         driver.getRatings();
                     }
                     break;
-
                 case 4:
+                    System.out.println("Balance: " + driver.getBalance());
+                    break;
+                case 5:
                     break;
                 default:
                     System.out.println("Invalid input");
                     break;
 
             }
-            if (driverChoice == 4) {
+            if (driverChoice == 5) {
                 break;
             }
         }

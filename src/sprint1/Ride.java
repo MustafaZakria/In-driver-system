@@ -16,6 +16,7 @@ public class Ride {
     LocalTime acceptTime;
     long duration;
     LocalTime arrivingTime;
+    LocalTime destTime;
 
     public Ride(String source, String destination, Customer customer) {
         this.source = source;
@@ -78,6 +79,13 @@ public class Ride {
             driver = (entry.getKey());
         }
         return driver;
+    }
+    public double getPrice() {
+        double price = 0;
+        for (Map.Entry<Driver, Double> entry : driverPrice.entrySet()) {
+            price = (entry.getValue());
+        }
+        return price;
     }
 
     @Override

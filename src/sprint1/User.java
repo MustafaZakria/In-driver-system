@@ -10,7 +10,7 @@ public abstract class User {
     protected String mobile;
     protected boolean suspend;
     protected Type type;
-    
+    protected double balance;
     
     public User(String username, String password, String mobile, Type type) {
         this.username = username;
@@ -69,6 +69,10 @@ public abstract class User {
 
     public Type getType() {
         return type;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     @Override
