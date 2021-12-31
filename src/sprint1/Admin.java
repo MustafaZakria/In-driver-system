@@ -27,13 +27,10 @@ public class Admin {
         }
     }
     
-    public void suspendUser(){
+    public void suspendUser(int indexChoice){
         
         system.getUsers();
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Choose the number of the user to suspend: ");
-        int indexChoice = scan.nextInt();
-        
+ 
         system.users.get(indexChoice-1).setSuspend(true);
         
     }

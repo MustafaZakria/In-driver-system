@@ -30,7 +30,7 @@ public abstract class User {
 
     }
     
-    public abstract void register();
+    //public abstract void register(String username, String password, String mobile, String license, String nationalID, String availableSeats);
 
     public void setUsername(String username) {
         this.username = username;

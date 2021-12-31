@@ -26,22 +26,18 @@ public class Customer extends User{
         this.balance = 1000;
     } 
 
-    @Override
-    public void register() {
-        Scanner input = new Scanner (System.in);
-        System.out.print("Enter Customer Username: ");
-        this.username = input.nextLine();
+    public void register(String username, String password, String mobile, String bithDate) {
+    	
+        this.username = username;
         
-        System.out.print("Enter Customer Password: ");
-        this.password = input.nextLine();
+        this.password = password;
         
-        System.out.print("Enter Customer Mobile: ");
-        this.mobile = input.nextLine();
+        this.mobile = mobile;
         
-        System.out.print("Enter Customer Birthdate ('YYYY-MM-DD'): ");
-        this.bithDate = input.nextLine();
+        this.bithDate = bithDate;
         
         this.suspend = false;
+        
         this.type = Type.Customer;
     }
     
@@ -74,24 +70,27 @@ public class Customer extends User{
         
     }
     
-    public void rateDriver(){
-        ArrayList<Ride> found = new ArrayList<>();
-        if(!Rides.isEmpty()){
-            for(Ride ride : Rides){
+    public void rateDriver(int rate, Ride ride,  ArrayList<Ride> found){
+//        ArrayList<Ride> found = new ArrayList<>();
+//        if(!Rides.isEmpty()){
+//            for(Ride ride : Rides){
                 ride.getDriverPrice();
                 Driver driver = (Driver) ride.driverPrice.keySet().toArray()[0];
                 DriverRating rating = new DriverRating(driver ,this);
-                rating.addRating();
+                
+                
+                rating.addRating(rate);
+                
                 found.add(ride);
                 driver.rideComplete(ride);
                 driver.availableSeats += ride.numOfPassengers;
-            }
-            Rides.removeAll(found);
-        }
-        
-        else{
-            System.out.println("Your Rides are Empty!");
-        }
+//            }
+//            Rides.removeAll(found);
+//        }
+//        
+//        else{
+//            System.out.println("Your Rides are Empty!");
+//        }
         
     }
    

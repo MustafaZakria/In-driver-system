@@ -67,8 +67,8 @@ public class Driver extends User{
         requestedRides.add(ride); 
     }
     
-    public void getRequestedRides(){
-        System.out.println(requestedRides);
+    public ArrayList<Ride> getRequestedRides(){
+        return requestedRides;
     }
 
     public double getAverageRating() {
@@ -92,22 +92,21 @@ public class Driver extends User{
         this.ratings = ratings;
     }
     
-    public void suggestPrice(){
-        double price;
-        Scanner scan = new Scanner(System.in);
-        ArrayList<Ride> found = new ArrayList<>();
-        for(Ride ride : requestedRides){
+    //-------------------------------
+    public void suggestPrice(double price, ArrayList<Ride> found, Ride ride){
+        //Scanner scan = new Scanner(System.in);
+        //ArrayList<Ride> found = new ArrayList<>();
+        //for(Ride ride : requestedRides){
             
-            System.out.print("Suggest a price from " + ride.source +" to " + ride.destination + ": ");
-            price = scan.nextDouble();
-            ride.driverPrice.put(this, price);
-            RideOffer rideOffer = new RideOffer(ride.source, ride.destination, price, this, ride.customer);
-            rideOffer.offerTime = LocalTime.now();
-            found.add(ride);
-            
-        }
-        requestedRides.removeAll(found);
         
+        //price = scan.nextDouble();
+        ride.driverPrice.put(this, price);
+        RideOffer rideOffer = new RideOffer(ride.source, ride.destination, price, this, ride.customer);
+        rideOffer.offerTime = LocalTime.now();
+        found.add(ride);
+            
+        //}
+        //requestedRides.removeAll(found);
     }
     
     public void arrived(Ride ride){
@@ -126,28 +125,21 @@ public class Driver extends User{
         return availableSeats;
     }
     
-    @Override
-    public void register() {
+    
+    public void register(String username, String password, String mobile, String license, String nationalID, int availableSeats) {
         Scanner input = new Scanner (System.in);
         
-        System.out.print("Enter Driver Username: ");
-        this.username = input.nextLine();
+        this.username = username;
         
-        System.out.print("Enter Driver Password: ");
-        this.password = input.nextLine();
+        this.password = password;
         
-        System.out.print("Enter Driver Mobile: ");
-        this.mobile = input.nextLine();
+        this.mobile = mobile;
         
-        System.out.print("Enter Driver Licence: ");
-        this.license = input.nextLine();
+        this.license = license;
         
-        System.out.print("Enter Driver National-ID: ");
-        this.nationalID = input.nextLine();
+        this.nationalID = nationalID;
         
-        System.out.print("Enter Available Seats: ");
-        this.availableSeats = input.nextInt();
-        
+        this.availableSeats = availableSeats;
         
         this.suspend = false;
         

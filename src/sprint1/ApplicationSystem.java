@@ -31,14 +31,7 @@ public class ApplicationSystem {
         
         return system;
     }
-    public User login() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter username: ");
-        String username = scanner.next();
-
-        System.out.print("Enter password: ");
-        String password = scanner.next();
+    public User login(String username, String password) {
 
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {

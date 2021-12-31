@@ -1,5 +1,7 @@
 package sprint1;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -55,7 +57,32 @@ public class Menu {
                     break;
 
                 case 3:
-                    customer.rateDriver();
+                	
+                    ArrayList<Ride> found = new ArrayList<>();
+                    if(!customer.Rides.isEmpty()){
+                        for(Ride ride : customer.Rides){
+                        	
+                        	System.out.println("Provide a star rating to the driver from 1 to 5 (1 worst, 5 Best)");
+                        	int rate = scan.nextInt();
+                        	customer.rateDriver( rate,  ride,  found);
+//                            ride.getDriverPrice();
+//                            Driver driver = (Driver) ride.driverPrice.keySet().toArray()[0];
+//                            DriverRating rating = new DriverRating(driver ,this);
+                        	
+//                            rating.addRating();
+//                            found.add(ride);
+//                            driver.rideComplete(ride);
+//                            driver.availableSeats += ride.numOfPassengers;
+                        
+                        }
+                        customer.Rides.removeAll(found);
+                    }
+                    
+                    else{
+                        System.out.println("Your Rides are Empty!");
+                    }
+                	
+                    
                     break;
 
                 case 4:
@@ -99,8 +126,18 @@ public class Menu {
 
                 case 2:
                     System.out.println("Driver's rides:");
-                    driver.getRequestedRides();
-                    driver.suggestPrice();
+                    System.out.println(driver.getRequestedRides());
+                    
+                    ArrayList<Ride> found = new ArrayList<>();
+                    
+                    for(Ride ride : driver.requestedRides){
+                    	System.out.print("Suggest a price from " + ride.source +" to " + ride.destination + ": ");
+                    	double price = scan.nextDouble();
+                    	driver.suggestPrice(price, found, ride);
+                    }
+                    driver.requestedRides.removeAll(found);
+                    
+                    
                     system.setAllOffers();
                     break;
 
@@ -151,7 +188,11 @@ public class Menu {
 
                 }
             } else if (adminChoice == 2) {
-                admin.suspendUser();
+            	
+            	System.out.println("Choose the number of the user to suspend: ");
+            	int indexChoice = scan.nextInt();
+            	
+                admin.suspendUser(indexChoice);
             } else if (adminChoice == 3) {
                 admin.getAllOffers();
             } else if (adminChoice == 4) {
