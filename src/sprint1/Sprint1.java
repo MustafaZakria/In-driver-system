@@ -1,5 +1,6 @@
 package sprint1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Sprint1 {
@@ -8,7 +9,7 @@ public class Sprint1 {
     	
         ApplicationSystem system = ApplicationSystem.getInstance();
         Admin admin = new Admin(system);
-        Menu menu = new Menu();
+        //Menu menu = new Menu();
         try (Scanner scan = new Scanner(System.in)) {
         	
 			while(true){
@@ -89,18 +90,218 @@ public class Sprint1 {
 			
 			        } else if (user.getType() == Type.Customer) {
 			             Customer customer = (Customer) user;
-			             menu.displayCustomerMenu(system, customer, admin);
+			             
+			             Scanner scann = new Scanner(System.in);
+			             System.out.println("Welcome: " + customer.getUsername());
+			             while (true) {
+			                 System.out.println("1- Request Ride\n2- Get Offers\n3- Rate Driver To complete The Ride\n4-Show Balance\n5- Exit");
+			                 int customerChoice = scan.nextInt();
+			                 switch (customerChoice) {
+
+			                     case 1:
+			                         System.out.println("Enter Source And Destination And Number Of Passengers With You");
+			                         String source = scann.next();
+			                         String destination = scann.next();
+			                         int numOfPassengers = scann.nextInt();
+			                         customer.requestRide(source, destination, numOfPassengers+1, system);
+			                         break;
+
+			                     case 2:
+
+			                         customer.getOffers();
+			                         if (!customer.offers.isEmpty()) {
+			                             System.out.println("Choose number of offer");
+			                             int offerChoice = scann.nextInt();
+			                             Ride ride;
+
+			                             ride = new Ride(customer.offers.get(offerChoice - 1).source, customer.offers.get(offerChoice - 1).dest, customer.offers.get(offerChoice - 1).price, customer.offers.get(offerChoice - 1).driver, customer,customer.offers.get(offerChoice - 1).customer.rideOrg.ride.numOfPassengers);
+			                             if(!system.decreaseAvailableSeats(ride)){
+			                                 System.out.println("No Available Seats");
+			                                 break;
+			                             }
+			                             
+			                             
+			                             customer.offers.get(offerChoice - 1).driver.Rides.add(ride);
+			                             Driver chosenDriver = customer.offers.get(offerChoice - 1).driver;
+			                             admin.discounts(ride);
+			                             customer.acceptRide(ride);
+			                             
+			                             
+			                             
+			                             chosenDriver.arrived(ride);
+			                             //system.decreaseAvailableSeats(ride);
+			                             system.setAllAcceptedRides();
+			                             
+			                             //chosenDriver.rideComplete(ride);
+
+			                         } else {
+			                             System.out.println("There are no offers available");
+			                         }
+
+			                         break;
+
+			                     case 3:
+			                     	
+			                         ArrayList<Ride> found = new ArrayList<>();
+			                         if(!customer.Rides.isEmpty()){
+			                             for(Ride ride : customer.Rides){
+			                             	
+			                             	System.out.println("Provide a star rating to the driver from 1 to 5 (1 worst, 5 Best)");
+			                                     ride.getDriverPrice();
+			                             	int rate = scann.nextInt();
+			                             	customer.rateDriver( rate,  ride,  found);
+//			                                 ride.getDriverPrice();
+//			                                 Driver driver = (Driver) ride.driverPrice.keySet().toArray()[0];
+//			                                 DriverRating rating = new DriverRating(driver ,this);
+			                             	
+//			                                 rating.addRating();
+//			                                 found.add(ride);
+//			                                 driver.rideComplete(ride);
+//			                                 driver.availableSeats += ride.numOfPassengers;
+			                             
+			                             }
+			                             customer.Rides.removeAll(found);
+			                         }
+			                         
+			                         else{
+			                             System.out.println("Your Rides are Empty!");
+			                         }
+			                     	
+			                         
+			                         break;
+
+			                     case 4:
+			                         System.out.println("Balance: " + customer.getBalance());
+			                         break;
+
+			                     case 5:
+			                         break;
+
+			                     default:
+			                         System.out.println("Invalid Choice");
+			                         break;
+			                 }
+			                 if (customerChoice == 5) {
+			                     break;
+			                 }
+			             } 	
+			             
+			             
+			             //------------
 			             
 			             
 			        } else if (user.getType() == Type.Driver) {
 			            Driver driver = (Driver) user;
-			            menu.displayDriverMenu(system, driver);
+			            
+			            
+			            Scanner scann = new Scanner(System.in);
+			            System.out.println("Welcome: " + driver.getUsername());
+			            while (true) {
+			                System.out.println("1- Add Favorite Areas\n2- Requested rides\n3- List Your Ratings\n4- Show Balance\n5- Exit");
+			                int driverChoice = scann.nextInt();
+			                switch (driverChoice) {
+			                    case 1: {
+			                        String area;
+			                        System.out.println("After finishing adding areas enter finish");
+
+			                        while (true) {
+			                            area = scann.next();
+			                            if (area.equals("finish")) {
+			                                break;
+			                            }
+			                            driver.addArea(area);
+			                        }
+			                        break;
+			                    }
+
+			                    case 2:
+			                        System.out.println("Driver's rides:");
+			                        System.out.println(driver.getRequestedRides());
+			                        
+			                        ArrayList<Ride> found = new ArrayList<>();
+			                        
+			                        for(Ride ride : driver.requestedRides){
+			                        	System.out.print("Suggest a price from " + ride.source +" to " + ride.destination + ": ");
+			                        	double price = scann.nextDouble();
+			                        	driver.suggestPrice(price, found, ride);
+			                        }
+			                        driver.requestedRides.removeAll(found);
+			                        
+			                        
+			                        system.setAllOffers();
+			                        break;
+
+			                    case 3:
+			                        if (driver.ratings.isEmpty()) {
+			                            System.out.println("You have no ratings");
+			                        } else {
+			                            driver.getRatings();
+			                        }
+			                        break;
+			                    case 4:
+			                        System.out.println("Balance: " + driver.getBalance());
+			                        break;
+			                    case 5:
+			                        break;
+			                    default:
+			                        System.out.println("Invalid input");
+			                        break;
+
+			                }
+			                if (driverChoice == 5) {
+			                    break;
+			                }
+			            }
+			            //----------------
 			            
 
 			        }
 			        
 			    } else if(choice == 3) {
-			    	menu.displayAdminMenu(admin);
+			    	
+			    	
+			        Scanner scann = new Scanner(System.in);
+			        System.out.println("Welcome Admin");
+			        while (true) {
+			            System.out.println("1-List All Pending Drivers\n2- Suspend User\n3-Get All Offers\n4-Get All Accepted Rides\n5-Show Arriving To User Location Event\n6-Show Arriving To User Destination Event\n7-Exit");
+
+			            int adminChoice = scann.nextInt();
+
+			            if (adminChoice == 1) {
+			                admin.getPendingDriverList();
+			                System.out.println("1-Verify Drivers\n2- Back");
+			                int listChoice = scann.nextInt();
+
+			                switch (listChoice) {
+			                    case 1:
+			                        admin.verify();
+			                        break;
+			                    case 2:
+			                        break;
+			                    default:
+			                        System.out.println("invaild choice");
+
+			                }
+			            } else if (adminChoice == 2) {
+			            	
+			            	System.out.println("Choose the number of the user to suspend: ");
+			            	int indexChoice = scann.nextInt();
+			            	
+			                admin.suspendUser(indexChoice);
+			            } else if (adminChoice == 3) {
+			                admin.getAllOffers();
+			            } else if (adminChoice == 4) {
+			                admin.getAllAcceptedRides();
+			            } else if (adminChoice == 5) {
+			                admin.getArrivingEvent();
+			            } else if (adminChoice == 6) {
+			                admin.getDestinationEvent();
+			            } else {
+			                break;
+			            }
+			        }
+			    
+			    //------------
 			        
 			    } else if (choice == 4) 
 			        break;
