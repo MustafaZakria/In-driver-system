@@ -20,9 +20,7 @@ public class RideOffer {
         this.customer = customer;
         notifyCustomer();
     }
-    
-    
-    
+        
     
     public void notifyCustomer(){
        customer.offers.add(this);

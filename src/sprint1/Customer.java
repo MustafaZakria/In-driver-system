@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 public class Customer extends User{
     
-    private RideOrganization rideOrg;
+    String bithDate;
+    RideOrganization rideOrg;
     ArrayList<RideOffer> offers;
     protected ArrayList<Ride> Rides;
     
@@ -37,13 +38,15 @@ public class Customer extends User{
         System.out.print("Enter Customer Mobile: ");
         this.mobile = input.nextLine();
         
+        System.out.print("Enter Customer Birthdate ('YYYY-MM-DD'): ");
+        this.bithDate = input.nextLine();
         
         this.suspend = false;
         this.type = Type.Customer;
     }
     
-    public void requestRide(String source, String destination, ApplicationSystem system){
-        RideOrganization rideOrg = new RideOrganization(new Ride(source,destination, this), system);
+    public void requestRide(String source, String destination,int numOfPassengers, ApplicationSystem system){
+        RideOrganization rideOrg = new RideOrganization(new Ride(source,destination,numOfPassengers ,this), system);
         this.rideOrg = rideOrg;
         this.rideOrg.matchDrivers(rideOrg.ride, system);
     }
@@ -58,9 +61,12 @@ public class Customer extends User{
         this.offers = offers;
     }
     
+    public void pay(Ride ride){
+        balance -= ride.getPrice();
+    }
     
     public void acceptRide(Ride ride){
-        balance -= ride.getPrice();
+        pay(ride);
         Rides.add(ride);
         ride.acceptTime = LocalTime.now();
         this.offers = null;
@@ -77,6 +83,8 @@ public class Customer extends User{
                 DriverRating rating = new DriverRating(driver ,this);
                 rating.addRating();
                 found.add(ride);
+                driver.rideComplete(ride);
+                driver.availableSeats += ride.numOfPassengers;
             }
             Rides.removeAll(found);
         }

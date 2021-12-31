@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sprint1;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author Dell
- */
 public class ApplicationSystem {
 
     protected ArrayList<User> users;
@@ -19,15 +11,26 @@ public class ApplicationSystem {
     protected ArrayList<Driver> verifiedDrivers;
     protected ArrayList<RideOffer> rideOffers;
     protected ArrayList<Ride> acceptedRides;
-
-    public ApplicationSystem() {
+    protected ArrayList<LocalDate> publicHolidays;
+    private static ApplicationSystem system;
+    
+    private ApplicationSystem() {
         users = new ArrayList<>();
         pendingDriverList = new ArrayList<>();
         verifiedDrivers = new ArrayList<>();
         rideOffers = new ArrayList<>();
         acceptedRides = new ArrayList<>();
+        publicHolidays = new ArrayList<>();
+        publicHolidays.add(LocalDate.of(2022, 1, 25));
+        publicHolidays.add(LocalDate.of(2021, 12, 31));
     }
-
+    
+    public static ApplicationSystem getInstance(){
+        if(system == null)
+            system = new ApplicationSystem();
+        
+        return system;
+    }
     public User login() {
         Scanner scanner = new Scanner(System.in);
 
@@ -70,8 +73,14 @@ public class ApplicationSystem {
             }
         }
     }
-    
-    
+
+    public boolean decreaseAvailableSeats(Ride ride) {
+        if (ride.getDriver().availableSeats >= ride.numOfPassengers) {
+            ride.getDriver().availableSeats -= ride.numOfPassengers;
+            return true;
+        }
+        return false;
+    }
 
     public void addUser(User user) {
         users.add(user);

@@ -31,7 +31,7 @@ public class RideOrganization {
         for(Driver driver : system.verifiedDrivers){
             for(String area : driver.favAreas)
             {
-                if(area.equals(ride.source))
+                if(area.equals(ride.source) && ride.numOfPassengers <= driver.availableSeats)
                 {
                     availableDrivers.add(driver);
                     driver.updateRides(ride);

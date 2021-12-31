@@ -6,7 +6,7 @@ public class Sprint1 {
     
     public static void main(String[] args) {
     	
-        ApplicationSystem system = new ApplicationSystem();
+        ApplicationSystem system = ApplicationSystem.getInstance();
         Admin admin = new Admin(system);
         Menu menu = new Menu();
         Scanner scan = new Scanner(System.in);

@@ -14,6 +14,7 @@ public class Driver extends User{
     protected String license;
     protected boolean verified;
     protected double averageRating;
+    protected int availableSeats;
     protected ArrayList<String> favAreas;
     protected ArrayList<Ride> requestedRides;
     protected ArrayList<Ride> Rides;
@@ -116,6 +117,15 @@ public class Driver extends User{
          ride.destTime = ride.arrivingTime.plusMinutes(ride.duration);
          balance += ride.getPrice();
     } 
+    
+    public void setAvailableSeats(int availableSeats){
+        this.availableSeats = availableSeats;
+    }
+    
+    public int getAvailableSeats(){
+        return availableSeats;
+    }
+    
     @Override
     public void register() {
         Scanner input = new Scanner (System.in);
@@ -134,6 +144,10 @@ public class Driver extends User{
         
         System.out.print("Enter Driver National-ID: ");
         this.nationalID = input.nextLine();
+        
+        System.out.print("Enter Available Seats: ");
+        this.availableSeats = input.nextInt();
+        
         
         this.suspend = false;
         

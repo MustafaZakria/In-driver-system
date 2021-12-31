@@ -6,11 +6,12 @@ import java.util.Scanner;
 
 public class Admin {
     ApplicationSystem system;
+    Discount discount;
     ArrayList<String> discountAreas;
-    final double discountPercentage = 0.1;
 
     public Admin(ApplicationSystem system) {
         this.system = system;
+        discount = new Discount();
         discountAreas = new ArrayList<>();
         discountAreas.add("giza");
         discountAreas.add("cairo");
@@ -69,10 +70,10 @@ public class Admin {
     }
     
     public void discounts(Ride ride) {
-        if(discountAreas.contains(ride.destination)) {
-            ride.getCustomer().balance += discountPercentage * ride.getPrice();           
-        }
-        
+       discount.birthDayDiscount(ride);
+       discount.discountAreas(discountAreas, ride);
+       discount.discountTwoPassengers(ride);
+       discount.firstRideDiscount(ride);
+       discount.holidaysDiscount(system.publicHolidays, ride);
     }
-
 }

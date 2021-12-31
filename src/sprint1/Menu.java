@@ -8,15 +8,16 @@ public class Menu {
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome: " + customer.getUsername());
         while (true) {
-            System.out.println("1- Request Ride\n2- Get Offers\n3- Rate Driver\n4-Show Balance\n5- Exit");
+            System.out.println("1- Request Ride\n2- Get Offers\n3- Rate Driver To complete The Ride\n4-Show Balance\n5- Exit");
             int customerChoice = scan.nextInt();
             switch (customerChoice) {
 
                 case 1:
-                    System.out.println("Enter Source And Destination");
+                    System.out.println("Enter Source And Destination And Number Of Passengers With You");
                     String source = scan.next();
                     String destination = scan.next();
-                    customer.requestRide(source, destination, system);
+                    int numOfPassengers = scan.nextInt();
+                    customer.requestRide(source, destination, numOfPassengers+1, system);
                     break;
 
                 case 2:
@@ -26,18 +27,26 @@ public class Menu {
                         System.out.println("Choose number of offer");
                         int offerChoice = scan.nextInt();
                         Ride ride;
+
+                        ride = new Ride(customer.offers.get(offerChoice - 1).source, customer.offers.get(offerChoice - 1).dest, customer.offers.get(offerChoice - 1).price, customer.offers.get(offerChoice - 1).driver, customer,customer.offers.get(offerChoice - 1).customer.rideOrg.ride.numOfPassengers);
+                        if(!system.decreaseAvailableSeats(ride)){
+                            System.out.println("No Available Seats");
+                            break;
+                        }
                         
-                        ride = new Ride(customer.offers.get(offerChoice - 1).source, customer.offers.get(offerChoice - 1).dest, customer.offers.get(offerChoice - 1).price, customer.offers.get(offerChoice - 1).driver, customer);
-                        admin.discounts(ride);
                         
                         customer.offers.get(offerChoice - 1).driver.Rides.add(ride);
                         Driver chosenDriver = customer.offers.get(offerChoice - 1).driver;
+                        admin.discounts(ride);
                         customer.acceptRide(ride);
                         
-                        chosenDriver.arrived(ride);
-                        system.setAllAcceptedRides();
-                        chosenDriver.rideComplete(ride);
                         
+                        
+                        chosenDriver.arrived(ride);
+                        //system.decreaseAvailableSeats(ride);
+                        system.setAllAcceptedRides();
+                        
+                        //chosenDriver.rideComplete(ride);
 
                     } else {
                         System.out.println("There are no offers available");
@@ -48,7 +57,7 @@ public class Menu {
                 case 3:
                     customer.rateDriver();
                     break;
-                    
+
                 case 4:
                     System.out.println("Balance: " + customer.getBalance());
                     break;
@@ -147,12 +156,11 @@ public class Menu {
                 admin.getAllOffers();
             } else if (adminChoice == 4) {
                 admin.getAllAcceptedRides();
-            }else if(adminChoice == 5){
+            } else if (adminChoice == 5) {
                 admin.getArrivingEvent();
-            } else if(adminChoice == 6){
+            } else if (adminChoice == 6) {
                 admin.getDestinationEvent();
-            }
-            else {
+            } else {
                 break;
             }
         }

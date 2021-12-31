@@ -13,23 +13,26 @@ public class Ride {
     String source, destination;
     Customer customer;
     HashMap<Driver, Double> driverPrice;
+    int numOfPassengers;
     LocalTime acceptTime;
     long duration;
     LocalTime arrivingTime;
     LocalTime destTime;
 
-    public Ride(String source, String destination, Customer customer) {
+    public Ride(String source, String destination,int numOfPassengers, Customer customer) {
         this.source = source;
         this.destination = destination;
         this.customer = customer;
+        this.numOfPassengers = numOfPassengers;
         this.driverPrice = new HashMap<Driver, Double>();
 
     }
 
-    public Ride(String source, String destination, double price, Driver driver, Customer customer) {
+    public Ride(String source, String destination, double price, Driver driver, Customer customer, int numOfPassengers) {
         this.source = source;
         this.destination = destination;
         this.customer = customer;
+        this.numOfPassengers = numOfPassengers;
         driverPrice = new HashMap<>();
         driverPrice.put(driver, price);
         this.duration = 10;
