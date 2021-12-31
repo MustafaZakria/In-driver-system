@@ -3,7 +3,6 @@ package sprint1;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Customer extends User{
     
@@ -27,17 +26,11 @@ public class Customer extends User{
     } 
 
     public void register(String username, String password, String mobile, String bithDate) {
-    	
         this.username = username;
-        
-        this.password = password;
-        
-        this.mobile = mobile;
-        
-        this.bithDate = bithDate;
-        
+        this.password = password;  
+        this.mobile = mobile;    
+        this.bithDate = bithDate;  
         this.suspend = false;
-        
         this.type = Type.Customer;
     }
     
@@ -71,27 +64,15 @@ public class Customer extends User{
     }
     
     public void rateDriver(int rate, Ride ride,  ArrayList<Ride> found){
-//        ArrayList<Ride> found = new ArrayList<>();
-//        if(!Rides.isEmpty()){
-//            for(Ride ride : Rides){
-                
-                Driver driver = (Driver) ride.driverPrice.keySet().toArray()[0];
-                DriverRating rating = new DriverRating(driver ,this);
-                
-                
-                rating.addRating(rate);
-                
-                found.add(ride);
-                driver.rideComplete(ride);
-                driver.availableSeats += ride.numOfPassengers;
-//            }
-//            Rides.removeAll(found);
-//        }
-//        
-//        else{
-//            System.out.println("Your Rides are Empty!");
-//        }
+        Driver driver = (Driver) ride.driverPrice.keySet().toArray()[0];
+        DriverRating rating = new DriverRating(driver ,this);
         
+        rating.addRating(rate);
+                
+        found.add(ride);
+        driver.rideComplete(ride);
+        driver.availableSeats += ride.numOfPassengers;
+
     }
    
     @Override

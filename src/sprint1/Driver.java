@@ -5,8 +5,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
-
 
 public class Driver extends User{
     
@@ -94,19 +92,11 @@ public class Driver extends User{
     
     //-------------------------------
     public void suggestPrice(double price, ArrayList<Ride> found, Ride ride){
-        //Scanner scan = new Scanner(System.in);
-        //ArrayList<Ride> found = new ArrayList<>();
-        //for(Ride ride : requestedRides){
-            
-        
-        //price = scan.nextDouble();
         ride.driverPrice.put(this, price);
         RideOffer rideOffer = new RideOffer(ride.source, ride.destination, price, this, ride.customer);
         rideOffer.offerTime = LocalTime.now();
         found.add(ride);
-            
-        //}
-        //requestedRides.removeAll(found);
+
     }
     
     public void arrived(Ride ride){
@@ -126,25 +116,15 @@ public class Driver extends User{
     }
     
     
-    public void register(String username, String password, String mobile, String license, String nationalID, int availableSeats) {
-        Scanner input = new Scanner (System.in);
-        
+    public void register(String username, String password, String mobile, String license, String nationalID, int availableSeats) {       
         this.username = username;
-        
         this.password = password;
-        
         this.mobile = mobile;
-        
-        this.license = license;
-        
-        this.nationalID = nationalID;
-        
-        this.availableSeats = availableSeats;
-        
-        this.suspend = false;
-        
-        this.verified = false;
-        
+        this.license = license;   
+        this.nationalID = nationalID;     
+        this.availableSeats = availableSeats;   
+        this.suspend = false;   
+        this.verified = false;  
         this.type = Type.Driver;
     }
 

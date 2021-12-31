@@ -9,13 +9,13 @@ public class Sprint1 {
     	
         ApplicationSystem system = ApplicationSystem.getInstance();
         Admin admin = new Admin(system);
-        //Menu menu = new Menu();
+
         try (Scanner scan = new Scanner(System.in)) {
         	
 			while(true){
 			    System.out.println("1- Register\n2- Login\n3- Admin\n4- Exit");
 			    int choice = scan.nextInt();
-			    //scan.nextLine();
+
 			    if(choice == 1){
 			        int registrationChoice;
 			        System.out.println("1- Driver\n2- Customer");
@@ -67,7 +67,6 @@ public class Sprint1 {
 			            
 			            customer.register( username,  password,  mobile,  bithDate);
 			            system.addUser(customer);
-			           // menu.displayCustomerMenu(system, customer, admin);
 			            
 			        } else 
 			            System.out.println("invalid choice");
@@ -119,20 +118,15 @@ public class Sprint1 {
 			                                 System.out.println("No Available Seats");
 			                                 break;
 			                             }
-			                             
-			                             
+
 			                             customer.offers.get(offerChoice - 1).driver.Rides.add(ride);
 			                             Driver chosenDriver = customer.offers.get(offerChoice - 1).driver;
 			                             admin.discounts(ride);
 			                             customer.acceptRide(ride);
 			                             
-			                             
-			                             
 			                             chosenDriver.arrived(ride);
-			                             //system.decreaseAvailableSeats(ride);
 			                             system.setAllAcceptedRides();
 			                             
-			                             //chosenDriver.rideComplete(ride);
 
 			                         } else {
 			                             System.out.println("There are no offers available");
@@ -147,18 +141,10 @@ public class Sprint1 {
 			                             for(Ride ride : customer.Rides){
 			                             	
 			                             	System.out.println("Provide a star rating to the driver from 1 to 5 (1 worst, 5 Best)");
-			                                     ride.getDriverPrice();
+			                                ride.getDriverPrice();
 			                             	int rate = scann.nextInt();
 			                             	customer.rateDriver( rate,  ride,  found);
-//			                                 ride.getDriverPrice();
-//			                                 Driver driver = (Driver) ride.driverPrice.keySet().toArray()[0];
-//			                                 DriverRating rating = new DriverRating(driver ,this);
-			                             	
-//			                                 rating.addRating();
-//			                                 found.add(ride);
-//			                                 driver.rideComplete(ride);
-//			                                 driver.availableSeats += ride.numOfPassengers;
-			                             
+
 			                             }
 			                             customer.Rides.removeAll(found);
 			                         }

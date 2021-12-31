@@ -4,10 +4,6 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author Dell
- */
 public class Ride {
 
     String source, destination;

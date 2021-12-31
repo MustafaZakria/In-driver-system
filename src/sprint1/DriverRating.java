@@ -1,7 +1,5 @@
 package sprint1;
 
-import java.util.Scanner;
-
 public class DriverRating {
     Driver driver;
     Customer customer;
@@ -21,9 +19,6 @@ public class DriverRating {
     }
     
     public void addRating(int rate){
-//        Scanner scan = new Scanner(System.in);
-//        System.out.println("Provide a star rating to the driver from 1 to 5 (1 worst, 5 Best)");
-//        int rate = scan.nextInt();
         driver.ratings.put(customer, rate);
         calculateAvg();
     }
