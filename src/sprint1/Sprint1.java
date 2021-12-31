@@ -66,7 +66,7 @@ public class Sprint1 {
 			            
 			            customer.register( username,  password,  mobile,  bithDate);
 			            system.addUser(customer);
-			            menu.displayCustomerMenu(system, customer, admin);
+			           // menu.displayCustomerMenu(system, customer, admin);
 			            
 			        } else 
 			            System.out.println("invalid choice");

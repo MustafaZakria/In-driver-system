@@ -74,7 +74,7 @@ public class Customer extends User{
 //        ArrayList<Ride> found = new ArrayList<>();
 //        if(!Rides.isEmpty()){
 //            for(Ride ride : Rides){
-                ride.getDriverPrice();
+                
                 Driver driver = (Driver) ride.driverPrice.keySet().toArray()[0];
                 DriverRating rating = new DriverRating(driver ,this);
                 

@@ -63,6 +63,7 @@ public class Menu {
                         for(Ride ride : customer.Rides){
                         	
                         	System.out.println("Provide a star rating to the driver from 1 to 5 (1 worst, 5 Best)");
+                                ride.getDriverPrice();
                         	int rate = scan.nextInt();
                         	customer.rateDriver( rate,  ride,  found);
 //                            ride.getDriverPrice();
