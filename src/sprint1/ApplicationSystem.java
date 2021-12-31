@@ -21,8 +21,10 @@ public class ApplicationSystem {
         rideOffers = new ArrayList<>();
         acceptedRides = new ArrayList<>();
         publicHolidays = new ArrayList<>();
-        publicHolidays.add(LocalDate.of(2022, 1, 25));
+        publicHolidays.add(LocalDate.of(2022, 01, 25));
         publicHolidays.add(LocalDate.of(2021, 12, 31));
+        publicHolidays.add(LocalDate.of(2022, 10, 06));
+        publicHolidays.add(LocalDate.of(2021, 05, 03));
     }
     
     public static ApplicationSystem getInstance(){
