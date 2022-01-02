@@ -29,8 +29,6 @@ public class Admin {
     
     public void suspendUser(int indexChoice){
         
-        system.getUsers();
- 
         system.users.get(indexChoice-1).setSuspend(true);
         
     }
@@ -40,7 +38,6 @@ public class Admin {
     }
     
     public void getAllOffers(){
-        //system.setAllOffers();
         for(RideOffer ride : system.rideOffers)
             System.out.println(ride);
     }

@@ -269,7 +269,7 @@ public class Sprint1 {
 
 			                }
 			            } else if (adminChoice == 2) {
-			            	
+			            	system.getUsers();
 			            	System.out.println("Choose the number of the user to suspend: ");
 			            	int indexChoice = scann.nextInt();
 			            	
