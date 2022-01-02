@@ -15,14 +15,12 @@ public class Discount {
     public void discountAreas(ArrayList<String> discountAreas, Ride ride) {
         if (discountAreas.contains(ride.destination)) {
             upgradeBalance(ride,  discountPercentage10);
-            System.out.println("area");
         }
     }
 
     public void discountTwoPassengers(Ride ride) {
         if (ride.numOfPassengers >= 2) {
             upgradeBalance(ride, discountPercentage5);
-            System.out.println("pass");
         }
         
     }
@@ -30,7 +28,6 @@ public class Discount {
     public void firstRideDiscount(Ride ride) {
         if (ride.getCustomer().Rides.isEmpty()) {
             upgradeBalance(ride,  discountPercentage10);
-            System.out.println("ride");
         }
     }
 
@@ -38,7 +35,6 @@ public class Discount {
         LocalDate date = LocalDate.parse(ride.getCustomer().bithDate);
         if (date.getDayOfMonth() == LocalDate.now().getDayOfMonth() && date.getMonthValue() == LocalDate.now().getMonthValue()) {
             upgradeBalance(ride,  discountPercentage10);
-            System.out.println("birth");
         }
     }
 
@@ -46,7 +42,6 @@ public class Discount {
         for (LocalDate date : publicHolidays) {
             if (date.getDayOfMonth() == LocalDate.now().getDayOfMonth() && date.getMonthValue() == LocalDate.now().getMonthValue()) {
                 upgradeBalance(ride, discountPercentage5);
-                System.out.println("holi");
                 break;
             }
         }
